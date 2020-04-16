@@ -8,3 +8,44 @@
  * 
  */
 
+$(document).ready(function() {
+    
+    // References
+    var list = $('.todo');
+
+    // Variables
+    var template = $('.template li').clone();
+
+    // Array per popolare liste
+    var easyList = [
+        'Make a to do list',
+        'Check off first thing on the to do list',
+        'Realise you\'ve already accomplished 2 things on the list',
+        'Reward yourself with a cookie'
+    ];
+
+    // Popolazione lista
+    addItemsToList(easyList);
+    addItemsToList(homerList);
+
+    // Funzione per popolare lista e aggiungere nuovi elementi
+    function addItemsToList(items = 0) {
+        
+        // Ricerca ultimo id (data-id attribute) presente in lista
+        var lastId = $('.todo li').last().attr('data-id');
+        if(isNaN(lastId)) lastId = 0;
+
+        // Controllo se si vuole inserire un array o un singolo elemento
+        if(!isNaN(items.length)) var itemsNumber = items.length;
+        else                     var itemsNumber = 1;
+        
+        // Ciclo di inserimento
+        for (var i = 0; i < items.length; i++) {            
+            var newItem = template.clone();
+            newItem.attr('data-id', (lastId++));
+            newItem.prepend(items[i]);
+            list.append(newItem);
+        }
+    }
+    
+}); // End of ready function
