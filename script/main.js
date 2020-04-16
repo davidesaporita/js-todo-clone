@@ -28,6 +28,7 @@ $(document).ready(function() {
     // Popolazione lista
     addItemsToList(easyList);
 
+    // Aggiungi elemento
     newInput.keyup(function(e) {
         if(e.which === 13 || e.keyCode === 13) {
             var text = $(this).val().trim();
@@ -37,9 +38,16 @@ $(document).ready(function() {
         }
     });
     
+    // Elimina elemento
+    $('body').on('click','.todo li i',function() {
+        $(this).parent().remove();
+    });
 
 
-
+    // Completa (o de-completa) elemento
+    $('body').on('click','.todo li',function(){
+        $(this).toggleClass('completed'); 
+    });
 
 
 
@@ -63,7 +71,6 @@ $(document).ready(function() {
             } else {
                 newItem.prepend(items[i]);
             }
-            
             list.append(newItem);
         }
     }

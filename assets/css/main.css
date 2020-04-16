@@ -94,3 +94,7 @@ footer {
 .todo .new-input:focus {
     background: rgba(0,0,0, .075);
 }
+
+.completed {
+    text-decoration: line-through;
+}
