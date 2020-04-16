@@ -12,6 +12,7 @@ $(document).ready(function() {
     
     // References
     var list = $('.todo');
+    var newInput = $('.new-input');
 
     // Variables
     var template = $('.template li').clone();
@@ -26,26 +27,45 @@ $(document).ready(function() {
 
     // Popolazione lista
     addItemsToList(easyList);
-    addItemsToList(homerList);
+
+    newInput.keyup(function(e) {
+        if(e.which === 13 || e.keyCode === 13) {
+            var text = $(this).val().trim();
+            if(text !== '') {
+                addItemsToList(text);
+            }
+        }
+    });
+    
+
+
+
+
+
 
     // Funzione per popolare lista e aggiungere nuovi elementi
     function addItemsToList(items = 0) {
         
         // Ricerca ultimo id (data-id attribute) presente in lista
         var lastId = $('.todo li').last().attr('data-id');
-        if(isNaN(lastId)) lastId = 0;
+        if(isNaN(lastId)) lastId = 0;     
 
         // Controllo se si vuole inserire un array o un singolo elemento
-        if(!isNaN(items.length)) var itemsNumber = items.length;
-        else                     var itemsNumber = 1;
+        if(typeof(items) === 'object') var itemsNumber = items.length;
+        else                           var itemsNumber = 1;
         
         // Ciclo di inserimento
-        for (var i = 0; i < items.length; i++) {            
+        for (var i = 0; i < itemsNumber; i++) {            
             var newItem = template.clone();
             newItem.attr('data-id', (lastId++));
-            newItem.prepend(items[i]);
+            if(itemsNumber === 1) {
+                newItem.prepend(items);
+            } else {
+                newItem.prepend(items[i]);
+            }
+            
             list.append(newItem);
         }
     }
-    
+
 }); // End of ready function

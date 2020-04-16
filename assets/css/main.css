@@ -64,6 +64,10 @@ footer {
     border-bottom: none;
 }
 
+.todo li:first-child {
+    border-bottom: none;
+}
+
 .todo li i {
     color: #444;
     cursor: pointer;
@@ -72,4 +76,21 @@ footer {
 
 .todo li i:hover {
     color: lightcoral;
+}
+
+.todo .new-input {
+  width: 100%;
+  height: 40px;
+  line-height: 20px;
+  margin-bottom: 30px;
+  padding: 0 15px;
+  font-size: 15px;
+  background: rgba(0,0,0, .15);
+  border: none;
+  transition: background .4s;
+}
+
+.todo .new-input:hover,
+.todo .new-input:focus {
+    background: rgba(0,0,0, .075);
 }
